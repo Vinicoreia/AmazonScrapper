@@ -11,5 +11,5 @@ import scrapy
 class AmazonscrapperItem(scrapy.Item):
     # define the fields for your item here like:
     product_name = scrapy.Field()
-    price = scrapy.Field()
-    link = scrapy.Field()
+    product_price = scrapy.Field()
+    product_link = scrapy.Field()

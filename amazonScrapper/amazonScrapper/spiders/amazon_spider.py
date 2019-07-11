@@ -12,6 +12,8 @@ class AmazonSpider(scrapy.Spider):
 
     def parse(self, response):
         items = AmazonscrapperItem()
-        items['price'] = response.css('.a-price-whole::text').extract_first()
-        items['product_name'] = response.css('#search > div.sg-row > div.sg-col-20-of-24.sg-col-28-of-32.sg-col-16-of-20.sg-col.s-right-column.sg-col-32-of-36.sg-col-8-of-12.sg-col-12-of-16.sg-col-24-of-28 > div > span:nth-child(4) > div.s-result-list.s-search-results.sg-row > div:nth-child(1) > div > div > div > div:nth-child(2) > div.sg-col-4-of-12.sg-col-8-of-16.sg-col-16-of-24.sg-col-12-of-20.sg-col-24-of-32.sg-col.sg-col-28-of-36.sg-col-20-of-28 > div > div:nth-child(1) > div > div > div:nth-child(1) > h2 > a > span::text').extract()
+        items['product_price'] = response.css('.a-price-whole::text')[:5].extract()
+        items['product_name'] = response.css('.a-color-base.a-text-normal::text')[:5].extract()
+        items['product_link'] = response.css('a.a-link-normal.a-text-normal::attr(href)')[:5].extract()
         yield items
+        
