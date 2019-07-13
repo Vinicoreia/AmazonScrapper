@@ -1,9 +1,6 @@
 ---
-
-
-  search_url: "https://www.amazon.de/s?k="
-  products_list:
-    - "jabra 65t"
-    - "kindle Paperwhite"
-    - "ps4"
-    - "mop"
+  products_url:
+    - "https://www.amazon.de/Jabra-Ear-Kopfh%C3%B6rer-Bluetooth-telefonieren-Sprachsteuerung-Titan-Schwarz/dp/B078GMZ9PQ/ref=sr_1_1_sspa?keywords=jabra+65t&qid=1563041833&s=gateway&sr=8-1-spons&psc=1"
+    - "https://www.amazon.de/Amazon-Kindle-Paperwhite-Wasserfest-Doppeltem-Speicherplatz/dp/B07747FR44/ref=sr_1_1?keywords=kindle+paperwhite&qid=1563042018&s=gateway&sr=8-1"
+    - "https://www.amazon.de/Vileda-Ultramat-Komplett-Bodenwischer-PowerPresse/dp/B0047Y1HP2/ref=sr_1_6?keywords=wischmob&qid=1563042123&s=gateway&sr=8-6"
+    - "https://www.amazon.de/TT-Home-Marokkanisches-Wohnzimmer-Interieur/dp/B07F968PQG/ref=sr_1_18?keywords=Teppich&qid=1563042179&s=gateway&sr=8-18&th=1"
