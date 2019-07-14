@@ -1,4 +1,6 @@
-const Scraper = require('./utils');
-const scrap = new Scraper();
+const Scraper = require('./Scraper');
 
-scrap.printUrls();
+
+
+const scrap = new Scraper();
+scrap.fetchProduct().then(p => console.log(p))

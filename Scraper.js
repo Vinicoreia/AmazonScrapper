@@ -21,9 +21,9 @@ class Scraper{
         }
     }
 
-    async fetchProduct (urls){
+    async fetchProduct (){
         const products = [];
-        for(const url of urls){
+        for(const url of this.urls.products_url){
             const resp  = await axios.get(url);
             const $ = cheerio.load(resp.data);
             products.push(
