@@ -6,9 +6,12 @@ const fs = require('fs');
 
 class Scraper{
     constructor(path = "./config.yml"){
+        this.config = {headers:{"User-agent":"Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"}}
         this.path = path;
+        this.products = {}
         try{
             this.urls = yaml.safeLoad(fs.readFileSync(this.path,'utf8'));
+            Object.keys(this.urls).map(item => this.products[item]={title:'', prices:[], minPrice: 9999999999})
         }
         catch(e){
             return null;
@@ -16,24 +19,23 @@ class Scraper{
     }
 
     printUrls(){
-        for(const url of this.urls.products_url){
-            console.log(url);
-        }
+        console.log(this.urls)
+    }
+    printProducts(){
+        console.log(this.products)
     }
 
     async fetchProduct (){
-        const products = [];
-        for(const url of this.urls.products_url){
-            const resp  = await axios.get(url);
+        for(const url of Object.keys(this.urls)){
+            const resp  = await axios.get(this.urls[url], this.config);
             const $ = cheerio.load(resp.data);
-            products.push(
-                {
-                    price: $("#priceblock_ourprice").text(),
-                    title: $("#productTitle").text().replace(/(\r\n|\n|\r)/gm, "").trim()
-                }
-            );
+            const price = parseFloat($("#priceblock_ourprice").text().replace(",", "."));
+            const title = $("#productTitle").text().replace(/(\r\n|\n|\r)/gm, "").trim();
+            this.products[url].title = title;
+            this.products[url].prices.push(price);
+            if(price < this.products[url].minPrice)
+                this.products[url].minPrice = price;
         }
-        return products;
     }
 }
 module.exports = Scraper;
