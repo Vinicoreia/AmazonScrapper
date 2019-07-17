@@ -2,7 +2,7 @@ const Scraper = require('./Scraper');
 
 const scrap = new Scraper();
 scrap.printUrls();
-// scrap.fetchProduct();
+scrap.fetchProduct();
 
 
 

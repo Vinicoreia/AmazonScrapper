@@ -27,14 +27,18 @@ class Scraper{
 
     async fetchProduct (){
         for(const url of Object.keys(this.urls)){
-            const resp  = await axios.get(this.urls[url], this.config);
-            const $ = cheerio.load(resp.data);
-            const price = parseFloat($("#priceblock_ourprice").text().replace(",", "."));
-            const title = $("#productTitle").text().replace(/(\r\n|\n|\r)/gm, "").trim();
-            this.products[url].title = title;
-            this.products[url].prices.push(price);
-            if(price < this.products[url].minPrice)
-                this.products[url].minPrice = price;
+            await axios.get(this.urls[url], this.config).then(
+                (resp)=>{
+                    const $ = cheerio.load(resp.data);
+                    const price = parseFloat($("#priceblock_ourprice").text().replace(",", "."));
+                    const title = $("#productTitle").text().replace(/(\r\n|\n|\r)/gm, "").trim();
+                    this.products[url].title = title;
+                    this.products[url].prices.push(price);
+                    if(price < this.products[url].minPrice)
+                        this.products[url].minPrice = price;
+                }
+            );
+            
         }
     }
 }
